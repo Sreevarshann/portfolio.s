@@ -1,0 +1,1841 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background-color: #000;
+}
+
+/* Background */
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, 
+                rgba(17, 20, 60, 0.8) 0%,
+                rgba(14, 16, 50, 0.9) 40%,
+                rgba(10, 12, 40, 0.95) 70%,
+                rgba(8, 10, 35, 1) 100%);
+    z-index: -2;
+    transition: background 1s ease;
+}
+
+body.scrolled .space-background {
+    background: #000000 !important;
+}
+
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, 
+                transparent 40%, 
+                rgba(0, 0, 0, 0.2) 75%, 
+                rgba(0, 0, 0, 0.3) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Orbit System */
+.orbit-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(142, 205, 247, 0.1);
+    border-radius: 50%;
+}
+
+.orbit-1 {
+    width: 40vw;
+    height: 40vw;
+}
+
+.orbit-2 {
+    width: 60vw;
+    height: 60vw;
+}
+
+.orbit-3 {
+    width: 80vw;
+    height: 80vw;
+}
+
+.dotted {
+    border: none;
+    background-image: repeating-linear-gradient(90deg, rgba(142, 205, 247, 0.1) 0%, rgba(142, 205, 247, 0.1) 1%, transparent 1%, transparent 5%);
+    background-size: 5% 1px;
+    background-repeat: repeat-x;
+    background-position: center;
+}
+
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(142, 205, 247, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(142, 205, 247, 0.4);
+}
+
+.dot-1 {
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dot-2 {
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, -50%);
+}
+
+.dot-3 {
+    left: 30%;
+    top: 75%;
+    transform: translate(-50%, -50%);
+}
+
+/* Background stars */
+.star {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.1s ease, opacity 0.3s ease;
+}
+
+/* Color variations */
+.color-spot {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navigation Styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    position: relative;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 101;
+}
+
+.logo span {
+    transition: color 0.3s;
+}
+
+.logo:hover span {
+    color: #4b83f0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s, transform 0.2s;
+    padding: 5px 0;
+    position: relative;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #8ecdf7;
+}
+
+/* Underline animation for nav links */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #4b83f0;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.resume-btn a {
+    background-color: #4b83f0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.resume-btn a:hover {
+    background-color: #3a71e4;
+    transform: translateY(-2px);
+}
+
+.arrow {
+    margin-left: 5px;
+    transition: transform 0.2s;
+}
+
+.resume-btn a:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+    display: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.mobile-menu-toggle svg {
+    color: white;
+    transition: color 0.3s;
+}
+
+.mobile-menu-toggle:hover svg {
+    color: #4b83f0;
+}
+
+/* Sticky navigation on scroll */
+nav.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 40px;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    margin-top: -40px; /* Push content up slightly */
+}
+
+.hero-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-text {
+    max-width: 60%;
+}
+
+h1 {
+    font-size: 5rem;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.tagline {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.highlight {
+    color: #4b83f0;
+    font-weight: 400;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Profile Image */
+.profile-image-container {
+    max-width: 40%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.floating-profile {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    animation: float 6s ease-in-out infinite;
+}
+
+.profile-line {
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(75, 131, 240, 0), rgba(75, 131, 240, 0.7), rgba(75, 131, 240, 0));
+    margin-top: 5px;
+    box-shadow: 0 0 8px rgba(75, 131, 240, 0.5);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 1440px) {
+    .hero-text h1 {
+        font-size: 4.5rem;
+    }
+    
+    .tagline {
+        font-size: 2.2rem;
+    }
+}
+
+/* Medium Screens (Laptops, small desktops) */
+@media (max-width: 1200px) {
+    nav {
+        padding: 15px 30px;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    .resume-btn a {
+        padding: 8px 16px;
+    }
+    
+    .hero-content {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .hero-text {
+        max-width: 55%;
+    }
+    
+    .hero-text h1 {
+        font-size: 4rem;
+    }
+    
+    .tagline {
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+    
+    .profile-image-container {
+        max-width: 45%;
+    }
+    
+    .floating-profile {
+        max-width: 90%;
+    }
+    
+    .orbit-1 {
+        width: 50vw;
+        height: 50vw;
+    }
+    
+    .orbit-2 {
+        width: 70vw;
+        height: 70vw;
+    }
+    
+    .orbit-3 {
+        width: 90vw;
+        height: 90vw;
+    }
+}
+
+/* Tablets and Small Laptops */
+@media (max-width: 992px) {
+    nav {
+        padding: 15px 25px;
+    }
+    
+    nav ul li {
+        margin: 0 8px;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+    }
+    
+    .resume-btn a {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+    
+    .hero {
+        padding: 0 5%;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+    
+    .profile-image-container {
+        max-width: 70%;
+    }
+    
+    .hero-text h1 {
+        font-size: 3.5rem;
+    }
+    
+    .tagline {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+}
+
+/* Tablets and Large Phones */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        margin-right: 10px;
+    }
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 20px 0;
+        border-top: 1px solid rgba(75, 131, 240, 0.3);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+    }
+    
+    nav.mobile-open ul {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 12px 0;
+        text-align: center;
+    }
+    
+    nav ul li a {
+        font-size: 16px;
+        padding: 8px 0;
+        display: inline-block;
+        width: 100%;
+    }
+    
+    nav ul li a::after {
+        display: none;
+    }
+    
+    .resume-btn {
+        margin-left: auto;
+    }
+    
+    .hero {
+        margin-top: 0;
+    }
+    
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+    
+    .tagline {
+        font-size: 1.5rem;
+    }
+    
+    .profile-image-container {
+        max-width: 80%;
+    }
+    
+    /* Adjust orbit sizes for smaller screens */
+    .orbit-1 {
+        width: 70vw;
+        height: 70vw;
+    }
+    
+    .orbit-2 {
+        width: 85vw;
+        height: 85vw;
+    }
+    
+    .orbit-3 {
+        width: 100vw;
+        height: 100vw;
+    }
+    
+    /* Fix animation performance on mobile */
+    .star {
+        transition: none;
+    }
+    
+    .floating-profile {
+        animation: float 8s ease-in-out infinite;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 576px) {
+    nav {
+        padding: 12px 20px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .resume-btn a {
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+    
+    .hero {
+        height: auto;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .tagline {
+        font-size: 1.3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .profile-image-container {
+        max-width: 90%;
+    }
+    
+    /* Make dots more visible on small screens */
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Very Small Phones */
+@media (max-width: 375px) {
+    nav {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 18px;
+    }
+    
+    .mobile-menu-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .resume-btn a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+    }
+}
+/* About Section - Final Layout */
+.about-section {
+    padding: 50px 5% 70px;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: 500;
+    color: white;
+}
+
+/* Main Grid Layout */
+.about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Skills Section - Row Layout */
+.skills-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Identity Section - Logo and Name */
+.identity-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Education and Photo Section */
+.education-photo-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Logo width (1fr) and Image width (2fr) */
+    gap: 15px;
+    align-items: stretch; /* Ensure both tiles stretch to the same height */
+}
+
+/* Education Card */
+.education-card {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Match the height of the photo container */
+    background-color: #E4EDF7; /* Light background for the education card */
+    border-radius: 16px;
+    width: 100%; /* Ensure it takes the full width of its grid cell */
+}
+
+/* Photo Container */
+.photo-container {
+    width: 100%;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 400px;
+}
+
+/* Card Styles */
+.about-card {
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    transition: opacity 0.6s ease;
+}
+
+.light-card {
+    background-color: #E4EDF7;
+}
+
+.white-card {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-card {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    height: 90px;
+}
+
+.logo-card, .name-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 130px;
+}
+
+.photo-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Card Content */
+.card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 0.95rem;
+    color: #4B7BEC;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.name-text {
+    font-size: 2.8rem;
+    color: #98A7BB;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.name-link, .photo-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    max-width: 70%;
+    height: auto;
+}
+
+.about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+}
+
+/* SVG icon size and color */
+.card-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #4B7BEC;
+}
+
+/* Animation for cards - they appear all at once */
+.about-card {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.about-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .skills-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .photo-container {
+        height: 35vh;
+        min-height: 250px;
+        max-height: 350px;
+    }
+    
+    .name-text {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .skills-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .identity-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .photo-container {
+        height: 30vh;
+        min-height: 200px;
+        max-height: 300px;
+    }
+    
+    .name-text {
+        font-size: 2rem;
+    }
+    
+    .skill-card {
+        height: auto;
+        min-height: 80px;
+    }
+    
+    .logo-card, .name-card, .education-card {
+        height: 100px;
+    }
+}
+
+/* Updated Skills Section Styling */
+.skills-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.skill-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.skill-card .card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #4B7BEC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.skill-card .card-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+}
+
+.skill-card .card-content {
+    flex-grow: 1;
+}
+
+.skill-card .card-title {
+    font-size: 1.1rem;
+    color: #4B7BEC;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.skill-card .small-title {
+    display: none; /* Hide the gray subtitle */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .skills-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card Content */
+.card-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #FFFFFF; /* White circle */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.6rem;
+    color: #4B7BEC; /* Bright blue */
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.small-title {
+    font-size: 1.3rem;
+}
+
+.name-text {
+    font-size: 3.5rem;
+    color: #98A7BB; /* Gray blue */
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.name-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    max-width: 70%;
+    height: auto;
+}
+
+.about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.photo-card:hover .about-photo {
+    transform: scale(1.02);
+}
+
+/* SVG icon size and color */
+.card-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #4B7BEC; /* Bright blue */
+}
+
+/* Small cards specific styling */
+.about-card.small-card {
+    padding: 20px;
+}
+
+.small-card .card-icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* Animation for cards */
+.about-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
+}
+
+.about-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Specific Grid Layout */
+.about-grid > div:nth-child(1) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(2) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(4) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(5) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.about-grid > div:nth-child(7) {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .wide-card {
+        grid-column: span 1;
+    }
+    
+    .photo-card {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-grid > div:nth-child(n) {
+        grid-column: span 1;
+    }
+    
+    .photo-card {
+        height: 250px;
+    }
+}
+/* Logo Card Styling */
+.logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Adjust padding if needed */
+    height: 130px; /* Fixed height of the box */
+    width: 100%; /* Ensure it takes full width of its container */
+    background-color: #FFFFFF; /* White background */
+    border-radius: 16px;
+    overflow: hidden; /* Ensure the logo doesn't overflow */
+}
+
+/* Logo Image Styling */
+.logo-image {
+    max-width: 100%; /* Ensure the logo fits within the card */
+    max-height: 100%; /* Ensure the logo fits within the card */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the entire logo is visible */
+}
+
+/* Education Section */
+/* Education and Photo Section */
+.education-photo-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Logo width (1fr) and Image width (2fr) */
+    gap: 15px;
+    align-items: stretch; /* Ensure both tiles stretch to the same height */
+    height: 350px; /* Increased height for the entire section */
+}
+
+/* Education Card */
+.education-card {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Match the height of the photo container */
+    background-color: #E4EDF7; /* Light background for the education card */
+    border-radius: 16px;
+    width: 100%; /* Ensure it takes the full width of its grid cell */
+}
+
+.education-content {
+    text-align: center;
+}
+
+.education-title {
+    font-size: 1.5rem;
+    color: #4B7BEC;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.education-details {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Photo Container */
+.photo-card {
+    width: 100%;
+    height: 100%; /* Ensure the photo card takes the full height of the container */
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Adjust the height of the photo container */
+.photo-container {
+    width: 100%;
+    height: 100%; /* Ensure the photo container takes the full height of the card */
+    min-height: 300px; /* Increased minimum height */
+    max-height: 350px; /* Increased maximum height */
+}
+
+@media (max-width: 768px) {
+    .education-photo-section {
+        grid-template-columns: 1fr; /* Stack education and photo on top of each other */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .education-card {
+        height: auto; /* Allow height to adjust based on content */
+        min-height: 200px; /* Increased minimum height for the education card */
+    }
+
+    .photo-container {
+        height: 300px; /* Adjust height for mobile */
+        min-height: 250px;
+        max-height: 300px;
+    }
+}
+
+/* Card Styles */
+.about-card {
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    transition: opacity 0.6s ease;
+}
+
+.light-card {
+    background-color: #E4EDF7;
+}
+
+.white-card {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-card {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    height: 90px;
+}
+
+.logo-card, .name-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 130px;
+}
+
+.photo-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .education-photo-section {
+        grid-template-columns: 1fr; /* Stack education and photo on top of each other */
+    }
+
+    .education-card {
+        height: auto; /* Allow height to adjust based on content */
+        min-height: 150px; /* Minimum height for the education card */
+    }
+
+    .photo-container {
+        height: 30vh; /* Adjust height for mobile */
+        min-height: 200px;
+        max-height: 300px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .logo-card {
+        height: 100px; /* Adjust height for smaller screens */
+    }
+
+    .logo-image {
+        max-width: 90%; /* Slightly reduce logo size for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-card {
+        height: 80px; /* Further adjust height for mobile screens */
+    }
+
+    .logo-image {
+        max-width: 80%; /* Further reduce logo size for mobile screens */
+    }
+}
+
+.name-text {
+    font-family: 'Signika Negative', sans-serif; /* Apply the Signika Negative font */
+    font-size: 2.8rem; /* Adjusted for single line */
+    color: #98A7BB; /* Keep the original color */
+    font-weight: 500; /* You can adjust the weight (400, 500, 600, 700) */
+    text-align: center;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Add this to your styles.css file */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Add this to center the content horizontally */
+    padding: 0 10%;
+    margin-top: -40px;
+  }
+  
+  .hero-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto; /* Add this to center the container */
+  }
+  
+  @media (min-width: 1600px) {
+    .hero-content {
+      max-width: 1400px;
+      padding: 0 20px;
+      justify-content: center; /* Center the content instead of space-between */
+      gap: 80px; /* Add gap between text and image */
+    }
+    
+    .hero-text {
+      max-width: 50%; /* Adjust the width for better proportion */
+    }
+  }
+
+  /* Add this to your styles.css file */
+@media (max-width: 768px) {
+    .logo span {
+      display: none; /* This hides the "SS" text on mobile */
+    }
+    
+    .mobile-menu-toggle {
+      margin-left: 0; /* Ensures the menu is aligned to the left */
+    }
+    
+    nav {
+      padding-left: 15px; /* Reduces left padding to position menu closer to edge */
+    }
+  }
+
+  .mobile-menu-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-wrapper {
+        width: 100%; /* Takes full width */
+        justify-content: flex-start; /* Aligns contents to the left */
+    }
+    
+    .logo {
+        margin-left: 10px; /* Adds some space between menu icon and logo (when visible) */
+    }
+}
+
+/* Add this to your styles.css file */
+@media (max-width: 768px) {
+    /* Improve logo card appearance */
+    .logo-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      height: 110px; /* Slightly reduced height for mobile */
+    }
+    
+    .logo-image {
+      max-width: 60%; /* Adjust logo size for better fit */
+      height: auto;
+    }
+    
+    /* Fix name card text appearance */
+    .name-card {
+      padding: 15px 10px;
+      height: auto; /* Allow height to adjust based on content */
+      min-height: 80px;
+    }
+    
+    .name-text {
+      font-size: 1.8rem; /* Smaller font size for mobile */
+      white-space: normal; /* Allow text to wrap if needed */
+      line-height: 1.2;
+      word-break: break-word; /* Helps with very long names */
+    }
+    
+    /* Improve overall card layout */
+    .identity-section {
+      gap: 10px; /* Smaller gap between items */
+    }
+  }
+
+  
+  /* Why Hire Me Section */
+.why-hire-section {
+    padding: 70px 5% 90px;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.subheading {
+    font-size: 1.3rem;
+    color: #4B7BEC;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.focus-title {
+    font-size: 2.5rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.focus-description {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 95%;
+}
+
+.focus-description .highlight {
+    color: #4B83F0;
+    font-weight: 500;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.skill-item svg {
+    margin-right: 10px;
+    min-width: 20px;
+    fill: #4B7BEC;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .focus-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .focus-title {
+        font-size: 2rem;
+    }
+    
+    .focus-description {
+        font-size: 1rem;
+    }
+    
+    .subheading {
+        font-size: 1.1rem;
+    }
+}
+/* Animation for Why Hire Me section */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tech Stack Section */
+/* Tools Section Styles */
+.tools-section {
+    padding: 50px 5% 30px; /* Reduced bottom padding */
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.tools-subtitle {
+    font-size: 1.3rem;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tech-card {
+    background: linear-gradient(145deg, rgba(18, 26, 68, 0.8) 0%, rgba(13, 20, 55, 0.9) 100%);
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 15px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    overflow: hidden;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.tech-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: rgba(245, 245, 250, 0.92); /* Softened white color */
+    width: 100%;
+    border-bottom: 1px solid rgba(75, 131, 240, 0.2);
+    height: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tech-icon {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    padding: 0;
+}
+
+.tech-icon img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.tech-title {
+    font-size: 1.3rem;
+    color: #1a1a2e; /* Darker but not fully black text */
+    font-weight: 500;
+}
+
+.tech-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 25px;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 1px solid rgba(75, 131, 240, 0.1); /* Adding subtle border */
+}
+
+.skill-icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.skill-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.skill-name {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.skill-icon:hover {
+    transform: scale(1.15);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.skill-icon:hover .skill-name {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.empty-card {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+/* Animation for tech cards */
+.tech-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.tech-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tech-skills {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-title {
+        font-size: 1.2rem;
+    }
+    
+    .tech-icon {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .tech-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .tech-header {
+        padding: 12px 20px;
+    }
+    
+    .tech-skills {
+        padding: 20px;
+    }
+    
+    .skill-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .skill-icon img {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tech-skills {
+        padding: 15px;
+    }
+    
+    .skill-icon {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .skill-icon img {
+        width: 24px;
+        height: 24px;
+    }
+}
+/* Project Section Styles - Add to styles.css */
+.projects-section {
+    padding: 30px 5% 50px; /* Reduced top padding */
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.project-showcase {
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.project-link {
+    display: block;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.project-link:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    border: 2px solid rgba(100, 255, 100, 0.3); /* Less saturated green border */
+    box-shadow: 0 0 10px rgba(100, 255, 100, 0.2), /* Less saturated inner glow */
+                0 0 20px rgba(100, 255, 100, 0.15), /* Less saturated middle glow */
+                0 0 30px rgba(100, 255, 100, 0.1); /* Less saturated outer glow */
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.project-image:hover {
+    box-shadow: 0 0 15px rgba(100, 255, 100, 0.3), /* Less saturated inner glow on hover */
+                0 0 30px rgba(100, 255, 100, 0.2), /* Less saturated middle glow on hover */
+                0 0 45px rgba(100, 255, 100, 0.15); /* Less saturated outer glow on hover */
+    border: 2px solid rgba(100, 255, 100, 0.4); /* Less saturated border on hover */
+}
+/* Style for the "View Other Projects" button */
+.view-more-projects {
+    text-align: center; /* Center the button */
+    margin-top: 30px; /* Add some space above the button */
+}
+
+.view-more-projects .cta-button {
+    background-color: #ffffff; /* Blue background */
+    color: rgb(0, 0, 0); /* White text */
+    padding: 12px 30px; /* Padding for the button */
+    border-radius: 30px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 1.1rem; /* Font size */
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.view-more-projects .cta-button:hover {
+    background-color: #3a71e4; /* Darker blue on hover */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .project-showcase {
+        margin: 20px 0;
+    }
+}
+/* Style for the project grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between projects */
+    margin-top: 30px; /* Space above the grid */
+}
+
+.project-card {
+    background: linear-gradient(145deg, rgba(18, 26, 68, 0.8) 0%, rgba(13, 20, 55, 0.9) 100%);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.project-link {
+    text-decoration: none;
+    color: white;
+}
+
+.project-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #4b83f0;
+}
+
+.project-description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+/* Animation for tech cards */
+.tech-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.tech-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project Details - Sreevarshan Sathiyamurthy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .project-page {
+            min-height: 100vh;
+            padding: 120px 5% 80px;
+            position: relative;
+        }
+        
+        .project-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .project-header {
+            margin-bottom: 40px;
+        }
+        
+        .project-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .project-header p {
+            font-size: 1.4rem;
+            color: #4b83f0;
+            margin-bottom: 30px;
+        }
+        
+        .project-image-full {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-content {
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 40px;
+        }
+        
+        .project-description {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .project-description h2 {
+            font-size: 2rem;
+            margin: 30px 0 15px;
+            color: white;
+        }
+        
+        .project-description p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .project-sidebar {
+            background: linear-gradient(145deg, rgba(18, 26, 68, 0.6) 0%, rgba(13, 20, 55, 0.8) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-sidebar h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #4b83f0;
+        }
+        
+        .project-details-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .project-details-list li {
+            display: flex;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            width: 100px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background-color: rgba(75, 131, 240, 0.15);
+            border: 1px solid rgba(75, 131, 240, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #4b83f0;
+        }
+        
+        .project-navigation {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: rgba(75, 131, 240, 0.1);
+            border-color: rgba(75, 131, 240, 0.5);
+            color: #4b83f0;
+        }
+        
+        .nav-button svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        
+        .nav-button.next svg {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-header p {
+                font-size: 1.2rem;
+            }
+            
+            .project-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background"></div>
+    
+    <nav>
+        <div class="mobile-menu-wrapper">
+            <div class="mobile-menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+            <div class="logo">
+                <span>SS</span>
+            </div>
+        </div>
+    
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Me</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="#">Get in touch</a></li>
+        </ul>
+        
+        <div class="resume-btn">
+            <a href="#">Resume <span class="arrow">→</span></a>
+        </div>
+    </nav>
+    
+    <main class="project-page">
+        <div class="project-container">
+            <div class="project-header">
+                <h1>Project Name</h1>
+                <p>Data Analysis & Visualization Project</p>
+                <img src="https://i.postimg.cc/LXV6mdnx/cas.webp" alt="Project Overview" class="project-image-full">
+            </div>
+            
+            <div class="project-content">
+                <div class="project-description">
+                    <h2>Overview</h2>
+                    <p>
+                        This comprehensive data analysis project focused on extracting meaningful insights from complex datasets to solve business challenges. 
+                        The project involved collecting, cleaning, and analyzing large volumes of data to identify patterns and trends that would inform strategic decisions.
+                    </p>
+                    
+                    <h2>Challenges</h2>
+                    <p>
+                        The project presented several challenges including data inconsistency, missing values, and the need to integrate multiple data sources. 
+                        Another significant challenge was transforming technical findings into actionable business recommendations that stakeholders could understand and implement.
+                    </p>
+                    
+                    <h2>Approach & Solution</h2>
+                    <p>
+                        I implemented a systematic approach to overcome these challenges:
+                    </p>
+                    <p>
+                        First, I developed a robust data pipeline to clean and transform raw data. Then I applied statistical methods and machine learning algorithms to identify patterns and relationships within the data. 
+                        Finally, I created interactive visualizations to communicate key insights effectively to stakeholders.
+                    </p>
+                    
+                    <h2>Results & Impact</h2>
+                    <p>
+                        The project delivered significant value by providing actionable insights that led to:
+                    </p>
+                    <p>
+                        • Improved operational efficiency by 25%<br>
+                        • Cost reduction of approximately 18%<br>
+                        • Enhanced decision-making processes across departments<br>
+                        • Creation of a sustainable data analytics framework for future projects
+                    </p>
+                </div>
+                
+                <div class="project-sidebar">
+                    <h3>Project Details</h3>
+                    <ul class="project-details-list">
+                        <li>
+                            <span class="detail-label">Duration:</span>
+                            <span>3 months</span>
+                        </li>
+                        <li>
+                            <span class="detail-label">Role:</span>
+                            <span>Lead Data Scientist</span>
+                        </li>
+                        <li>
+                            <span class="detail-label">Team Size:</span>
+                            <span>4 members</span>
+                        </li>
+                        <li>
+                            <span class="detail-label">Year:</span>
+                            <span>2023</span>
+                        </li>
+                    </ul>
+                    
+                    <h3>Technologies</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Tableau</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Power BI</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-navigation">
+                <a href="index.html#projects" class="nav-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Back to Projects
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
