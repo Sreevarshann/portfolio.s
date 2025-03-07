@@ -52,7 +52,7 @@
         
         .about-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr;
             gap: 40px;
         }
         
@@ -69,31 +69,11 @@
             color: rgba(255, 255, 255, 0.8);
         }
         
-        .about-sidebar h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #4b83f0;
-            font-weight: 500;
-        }
-        
-        .skills-list, .interest-list {
-            list-style: none;
-            padding: 0;
+        .section-title {
+            font-size: 2.5rem;
             margin-bottom: 30px;
-        }
-        
-        .skills-list li, .interest-list li {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .skills-list li::before, .interest-list li::before {
-            content: "•";
+            font-weight: 500;
             color: #4b83f0;
-            font-size: 1.5rem;
-            margin-right: 10px;
         }
         
         .cta-button {
@@ -132,40 +112,120 @@
             width: 24px;
             height: 24px;
         }
-
-        /* New Styles for "What Drives Me" and "My Process" Sections */
-        .about-drives-me, .about-process {
-            margin-bottom: 60px;
+        
+        /* Hobbies Section */
+        .hobbies-section {
+            margin-top: 40px;
         }
-
-        .about-drives-me h2, .about-process h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #4b83f0;
+        
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
         }
-
-        .about-drives-me p, .about-process p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.8);
+        
+        .hobby-card {
+            background: linear-gradient(145deg, rgba(18, 26, 68, 0.8) 0%, rgba(13, 20, 55, 0.9) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
-
-        .about-process ul {
-            list-style: none;
-            padding: 0;
+        
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
-
-        .about-process ul li {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+        
+        .hobby-image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
         }
-
-        .about-process ul li::before {
-            content: "•";
-            color: #4b83f0;
+        
+        .hobby-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hobby-card:hover .hobby-image {
+            transform: scale(1.1);
+        }
+        
+        .hobby-content {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hobby-title {
             font-size: 1.5rem;
-            margin-right: 10px;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hobby-title::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 0;
+            background-color: #4b83f0;
+            margin: 5px auto 0;
+            transition: width 0.3s ease;
+        }
+        
+        .hobby-card:hover .hobby-title::after {
+            width: 70%;
+        }
+        
+        .hobby-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        
+        .hobby-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4b83f0;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: auto;
+            transition: color 0.3s ease;
+        }
+        
+        .hobby-link svg {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hobby-card:hover .hobby-link {
+            color: white;
+        }
+        
+        .hobby-card:hover .hobby-link svg {
+            transform: translateX(5px);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hobbies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
@@ -179,20 +239,25 @@
                 margin-bottom: 20px;
             }
             
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
             .about-title-container h1 {
                 font-size: 2.5rem;
             }
-
+            
             .about-title-container p {
                 font-size: 1.2rem;
             }
-
-            .about-drives-me h2, .about-process h2 {
+            
+            .section-title {
                 font-size: 2rem;
+            }
+            
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hobby-image-container {
+                height: 180px;
             }
         }
     </style>
@@ -228,61 +293,80 @@
                 </div>
                 <div class="about-title-container">
                     <h1>Sreevarshan Sathiyamurthy</h1>
-                    <p>Detail-Oriented Data Scientist | Complex Problem Solver</p>
+                    <p>Beyond The Data Scientist</p>
                 </div>
             </div>
             
             <div class="about-content">
                 <div class="about-bio">
-                    <!-- What Drives Me Section -->
-                    <div class="about-drives-me">
-                        <h2>What Drives Me</h2>
-                        <p>I believe great data science can transform businesses, and I'm dedicated to creating innovative, data-driven solutions that solve complex problems. My passion lies in turning raw data into actionable insights that drive meaningful change.</p>
-                    </div>
-
-                    <!-- My Process Section -->
-                    <div class="about-process">
-                        <h2>My Process</h2>
-                        <p>My approach to data science is methodical and iterative. I start with thorough data exploration and analysis, followed by model development and validation. Continuous feedback ensures that the final solution is both accurate and impactful.</p>
-                        <ul>
-                            <li>Data Exploration & Cleaning</li>
-                            <li>Model Development & Validation</li>
-                            <li>Continuous Feedback & Improvement</li>
-                        </ul>
-                    </div>
-
-                    <!-- Beyond the Code Section -->
-                    <div class="about-drives-me">
-                        <h2>Beyond the Code</h2>
-                        <p>Outside of work, I enjoy exploring new technologies, reading about AI advancements, and working on personal projects. I also love traveling and staying active, which keeps me inspired and open to new perspectives.</p>
-                    </div>
-
-                    <!-- Looking Ahead Section -->
-                    <div class="about-process">
-                        <h2>Looking Ahead</h2>
-                        <p>I'm always seeking new challenges and opportunities to grow. Let's connect and create impactful data-driven solutions together.</p>
-                        <a href="#" class="cta-button">Collaborate with Me</a>
-                    </div>
-                </div>
-                
-                <div class="about-sidebar">
-                    <h3>Technical Expertise</h3>
-                    <ul class="skills-list">
-                        <li>Advanced Data Analytics</li>
-                        <li>Machine Learning Modeling</li>
-                        <li>Statistical Analysis</li>
-                        <li>Python & R Programming</li>
-                        <li>Data Visualization</li>
-                        <li>SQL & Database Management</li>
-                    </ul>
+                    <p>When I'm not solving complex data problems, I enjoy enriching my life through various hobbies and interests. I believe that maintaining a balance between professional pursuits and personal passions leads to creativity and fresh perspectives.</p>
                     
-                    <h3>Professional Interests</h3>
-                    <ul class="interest-list">
-                        <li>Predictive Analytics</li>
-                        <li>Artificial Intelligence</li>
-                        <li>Strategic Data Solutions</li>
-                        <li>Technology Innovation</li>
-                    </ul>
+                    <div class="hobbies-section">
+                        <h2 class="section-title">Hobbies</h2>
+                        
+                        <div class="hobbies-grid">
+                            <!-- Photography Card -->
+                            <div class="hobby-card">
+                                <div class="hobby-image-container">
+                                    <img src="https://i.postimg.cc/ZqhTxW69/7f0e9fce-162d-4e9f-9a3d-7a43919b1429.webp" alt="Photography" class="hobby-image">
+                                </div>
+                                <div class="hobby-content">
+                                    <h3 class="hobby-title">My Photography Gallery</h3>
+                                    <p class="hobby-description">Capturing moments and perspectives through my lens. I enjoy documenting beautiful landscapes and candid moments.</p>
+                                    <a href="photography.html" class="hobby-link">
+                                        View Gallery
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Movies Card -->
+                            <div class="hobby-card">
+                                <div class="hobby-image-container">
+                                    <img src="https://i.postimg.cc/7Y28txHS/IMG-2437.webp" alt="Movies" class="hobby-image">
+                                </div>
+                                <div class="hobby-content">
+                                    <h3 class="hobby-title">Movies & Cinema</h3>
+                                    <p class="hobby-description">I'm passionate about films across different genres, cultures, and eras. I appreciate storytelling and cinematic artistry.</p>
+                                    <a href="#" class="hobby-link">
+                                        My Favorites
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Football Card -->
+                            <div class="hobby-card">
+                                <div class="hobby-image-container">
+                                    <img src="https://i.postimg.cc/s2cRPwV8/IMG-1672.webp" alt="Football" class="hobby-image">
+                                </div>
+                                <div class="hobby-content">
+                                    <h3 class="hobby-title">Football</h3>
+                                    <p class="hobby-description">Football isn't just a sport for me, it's a passion. I enjoy playing and following my favorite teams and players.</p>
+                                    <a href="#" class="hobby-link">
+                                        Learn More
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="personal-section" style="margin-top: 60px;">
+                        <h2 class="section-title">Beyond the Hobbies</h2>
+                        <p>I'm an avid traveler who enjoys exploring new cultures and places. When not traveling, I enjoy reading books on a variety of topics ranging from science fiction to psychology. I also find joy in cooking dishes from various cuisines and experimenting with new recipes.</p>
+                        
+                        <p>I believe that these diverse interests complement my professional life by providing new perspectives and creative approaches to problem-solving. They help me maintain a balanced lifestyle and continuously foster personal growth.</p>
+                    </div>
                 </div>
             </div>
         </div>
