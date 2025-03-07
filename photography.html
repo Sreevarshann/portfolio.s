@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Gallery - Sreevarshan Sathiyamurthy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .gallery-page {
+            min-height: 100vh;
+            padding: 120px 5% 80px;
+            position: relative;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .gallery-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Lightbox styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img {
+            max-width: 80%;
+            max-height: 80vh;
+            border-radius: 5px;
+        }
+        
+        .lightbox-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .lightbox-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .lightbox-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Custom Back Button Styles */
+        .nav-back-button {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-back-button:hover {
+            color: #4b83f0;
+        }
+        
+        .nav-back-button svg {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .gallery-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
+            
+            .lightbox-img {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background"></div>
+    
+    <nav>
+        <div class="logo">
+            <a href="about-me.html" class="nav-back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                Back to About Me
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Me</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Get in touch</a></li>
+        </ul>
+        <div class="resume-btn">
+            <a href="#">Resume <span class="arrow">→</span></a>
+        </div>
+    </nav>
+    
+    <main class="gallery-page">
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h1>My Photography</h1>
+                <p>Capturing moments and perspectives through my lens. Here's a collection of some of my favorite photographs.</p>
+            </div>
+            
+            <div class="photo-grid">
+                <!-- Photo grid items will be added dynamically via JavaScript -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Lightbox for image viewing -->
+    <div class="lightbox">
+        <img src="" alt="Full-size photograph" class="lightbox-img">
+        <div class="lightbox-controls">
+            <button class="lightbox-btn prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="lightbox-btn next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+        <button class="lightbox-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Array of image URLs
+            const photoUrls = [
+                "https://i.postimg.cc/g2hzhVLF/275b98d6-5165-4da5-9c34-b3a83169f0f6.webp",
+                "https://i.postimg.cc/ZqhTxW69/7f0e9fce-162d-4e9f-9a3d-7a43919b1429.webp",
+                "https://i.postimg.cc/wTZx3fvQ/9c51438b-e6d8-4d62-b4f3-4356b1f90db3.webp",
+                "https://i.postimg.cc/28V8kRz5/C3-CA6-A66-95-B8-45-C4-9-B71-FB398-E802443.webp",
+                "https://i.postimg.cc/zBz844t8/e253559a-e15a-4fb3-bf07-d28b0d0936b5.webp",
+                "https://i.postimg.cc/R0QvsvTg/ecb4a07c-1671-44ed-9517-cc7b6df23e45.webp",
+                "https://i.postimg.cc/MT9qwtNR/FABB3295-2251-42-DB-B766-4-B64867069-C6.webp",
+                "https://i.postimg.cc/g0dW6fP8/IMG-0121.webp",
+                "https://i.postimg.cc/RCb4bscx/IMG-0468.webp",
+                "https://i.postimg.cc/Kj4F8BhW/IMG-0508.webp",
+                "https://i.postimg.cc/XqhWGqVY/IMG-0687.webp",
+                "https://i.postimg.cc/vHgbRrzg/IMG-0741.webp",
+                "https://i.postimg.cc/HsqHTrZS/IMG-1039.webp",
+                "https://i.postimg.cc/fRYsyM1M/IMG-1099.webp",
+                "https://i.postimg.cc/rmZX3sRN/IMG-1112.webp",
+                "https://i.postimg.cc/yxwq6GPJ/IMG-1390.webp",
+                "https://i.postimg.cc/rmw2fxsp/IMG-1471.webp",
+                "https://i.postimg.cc/s2cRPwV8/IMG-1672.webp",
+                "https://i.postimg.cc/Bb8903x9/IMG-1762.webp",
+                "https://i.postimg.cc/7Y28txHS/IMG-2437.webp",
+                "https://i.postimg.cc/dVcMzz3p/IMG-2691.webp",
+                "https://i.postimg.cc/7Z1vDmT6/IMG-2770.webp",
+                "https://i.postimg.cc/xj7VPk20/IMG-3054.webp",
+                "https://i.postimg.cc/q7pP7y8G/IMG-3078.webp",
+                "https://i.postimg.cc/R0GjJhdx/IMG-3091.webp",
+                "https://i.postimg.cc/k4pzwHLj/IMG-3297.webp",
+                "https://i.postimg.cc/ydd2mKpg/IMG-3339.webp",
+                "https://i.postimg.cc/59H21W92/IMG-3562.webp",
+                "https://i.postimg.cc/cCtjzmSd/IMG-4160.webp",
+                "https://i.postimg.cc/y6wY8pWX/IMG-5065.webp",
+                "https://i.postimg.cc/Rqr8xHSK/IMG-6248.webp",
+                "https://i.postimg.cc/x1QfKkvX/IMG-7315.webp",
+                "https://i.postimg.cc/T3cRQR0C/IMG-8499.webp",
+                "https://i.postimg.cc/yYc6ghZq/IMG-9872.webp"
+            ];
+            
+            const photoGrid = document.querySelector('.photo-grid');
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = document.querySelector('.lightbox-img');
+            const prevBtn = document.querySelector('.lightbox-btn.prev');
+            const nextBtn = document.querySelector('.lightbox-btn.next');
+            const closeBtn = document.querySelector('.lightbox-close');
+            
+            let currentIndex = 0;
+            
+            // Create photo grid items
+            photoUrls.forEach((url, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.classList.add('photo-item');
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Photography ${index + 1}`;
+                img.loading = 'lazy'; // Lazy load images
+                
+                photoItem.appendChild(img);
+                photoGrid.appendChild(photoItem);
+                
+                // Add click event to open lightbox
+                photoItem.addEventListener('click', () => {
+                    openLightbox(index);
+                });
+            });
+            
+            // Open lightbox
+            function openLightbox(index) {
+                currentIndex = index;
+                lightboxImg.src = photoUrls[index];
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+            
+            // Close lightbox
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Allow scrolling
+            }
+            
+            // Navigation functions
+            function showPrevImage() {
+                currentIndex = (currentIndex - 1 + photoUrls.length) % photoUrls.length;
+                lightboxImg.src = photoUrls[currentIndex];
+            }
+            
+            function showNextImage() {
+                currentIndex = (currentIndex + 1) % photoUrls.length;
+                lightboxImg.src = photoUrls[currentIndex];
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextImage);
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            // Close on esc key
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    }
+                }
+            });
+            
+            // Close when clicking outside the image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
